@@ -1,3 +1,5 @@
+package br.com.gustavo.riposati;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -45,7 +47,7 @@ class Tree {
         }
     }
 
-    void preOrder(Node root){
+    static void preOrder(Node root){
         if(root!=null) {
             if (flag == 0) {
                 System.out.print(root.key);
@@ -58,16 +60,16 @@ class Tree {
         }
     }
 
-    void postOrder(Node root,Node guardaRaiz){
+    void postOrder(Node root,Node keepRoot){
 
         if(root!=null){
-            if(root.key==guardaRaiz.key){
-                postOrder(root.left,guardaRaiz);
-                postOrder(root.right,guardaRaiz);
+            if(root.key==keepRoot.key){
+                postOrder(root.left,keepRoot);
+                postOrder(root.right,keepRoot);
                 System.out.print(root.key);
             }else{
-                postOrder(root.left,guardaRaiz);
-                postOrder(root.right,guardaRaiz);
+                postOrder(root.left,keepRoot);
+                postOrder(root.right,keepRoot);
                 System.out.print(root.key + " ");
             }
         }
@@ -105,7 +107,7 @@ class Tree {
 
             else {
 
-                if(root.left == null && root.right == null) // Nó Folha
+                if(root.left == null && root.right == null)
 
                     root = null;
 
@@ -153,19 +155,19 @@ public class Main {
 
         while ((keys = in.readLine()) != null && keys.length() != 0) {
 
-            String keyAux[] = keys.split(" ");
+            String[] keyAux = keys.split(" ");
 
             if (keyAux.length == 1) {
 
                 if (keyAux[0].equals("INFIXA")) {
-                    tree.maior = tree.treeMaximum(tree.root);
+                    Tree.maior = tree.treeMaximum(tree.root);
                     tree.inOrder(tree.root);
                     System.out.print("\n");
                 }
 
                 if (keyAux[0].equals("PREFIXA")) {
-                    tree.preOrder(tree.root);
-                    tree.flag = 0;
+                    Tree.preOrder(tree.root);
+                    Tree.flag = 0;
                     System.out.print("\n");
                 }
 
@@ -175,12 +177,10 @@ public class Main {
                 }
             } else {
 
-                if (keyAux[0].equals("I")) {
-                    tree.root = tree.insert(Integer.parseInt(keyAux[1]), tree.root);
-                } else if (keyAux[0].equals("P")) {
-                    tree.searchNode(Integer.parseInt(keyAux[1]), tree.root);
-                } else if (keyAux[0].equals("R")) {
-                    tree.root = tree.removeNode(Integer.parseInt(keyAux[1]), tree.root);
+                switch (keyAux[0]) {
+                    case "I" -> tree.root = tree.insert(Integer.parseInt(keyAux[1]), tree.root);
+                    case "P" -> tree.searchNode(Integer.parseInt(keyAux[1]), tree.root);
+                    case "R" -> tree.root = tree.removeNode(Integer.parseInt(keyAux[1]), tree.root);
                 }
             }
         }
