@@ -98,41 +98,39 @@ class Tree {
             return null;
         }
 
-        else{
+        if (root.key < key) {
+            root.right = removeNode(key, root.right);
+        } else if (root.key > key)
+            root.left = removeNode(key, root.left);
 
-            if (root.key < key) {
-                root.right = removeNode(key, root.right);
-            } else if (root.key > key)
-                root.left = removeNode(key, root.left);
+        else {
+
+            if(root.left == null && root.right == null)
+
+                root = null;
+
+            else if (root.left == null)
+
+                root = root.right;
+
+            else if (root.right == null)
+
+                root = root.left;
 
             else {
 
-                if(root.left == null && root.right == null)
+                Node rootAux = root.left;
 
-                    root = null;
-
-                else if (root.left == null)
-
-                    root = root.right;
-
-                else if (root.right == null)
-
-                    root = root.left;
-
-                else {
-
-                    Node rootAux = root.left;
-
-                    while (rootAux.right != null) {
-                        rootAux = rootAux.right;
-                    }
-                    int rootOldKey = root.key;
-                    root.key = rootAux.key;
-                    rootAux.key = rootOldKey;
-                    root.left = removeNode(rootOldKey,root.left);
+                while (rootAux.right != null) {
+                    rootAux = rootAux.right;
                 }
+                int rootOldKey = root.key;
+                root.key = rootAux.key;
+                rootAux.key = rootOldKey;
+                root.left = removeNode(rootOldKey,root.left);
             }
         }
+
         return root;
     }
     int treeMaximum(Node root){
