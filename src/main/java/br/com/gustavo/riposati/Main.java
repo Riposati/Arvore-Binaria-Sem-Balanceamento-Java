@@ -17,7 +17,7 @@ class Node{
 class Tree {
     Node root;
     static int flag=0;
-    static int maior=0;
+    static int biggest =0;
 
     Node insert(int key, Node root) {
 
@@ -34,7 +34,7 @@ class Tree {
     }
     void inOrder(Node root){
         if(root!=null){
-            if(root.key==maior){
+            if(root.key== biggest){
                 inOrder(root.left);
                 System.out.print(root.key);
                 inOrder(root.right);
@@ -159,28 +159,37 @@ public class Main {
 
             if (keyAux.length == 1) {
 
-                if (keyAux[0].equals("INFIXA")) {
-                    Tree.maior = tree.treeMaximum(tree.root);
-                    tree.inOrder(tree.root);
-                    System.out.print("\n");
+                switch(keyAux[0]){
+
+                    case "INFIXA":
+                        Tree.biggest = tree.treeMaximum(tree.root);
+                        tree.inOrder(tree.root);
+                        System.out.print("\n");
+                        break;
+
+                    case "PREFIXA":
+                        Tree.preOrder(tree.root);
+                        Tree.flag = 0;
+                        System.out.print("\n");
+                        break;
+
+                    case "POSFIXA":
+                        tree.postOrder(tree.root, tree.root);
+                        System.out.print("\n");
+                        break;
+
+                    default:
+                        break;
                 }
 
-                if (keyAux[0].equals("PREFIXA")) {
-                    Tree.preOrder(tree.root);
-                    Tree.flag = 0;
-                    System.out.print("\n");
-                }
-
-                if (keyAux[0].equals("POSFIXA")) {
-                    tree.postOrder(tree.root, tree.root);
-                    System.out.print("\n");
-                }
             } else {
 
-                switch (keyAux[0]) {
-                    case "I" -> tree.root = tree.insert(Integer.parseInt(keyAux[1]), tree.root);
-                    case "P" -> tree.searchNode(Integer.parseInt(keyAux[1]), tree.root);
-                    case "R" -> tree.root = tree.removeNode(Integer.parseInt(keyAux[1]), tree.root);
+                if (keyAux[0].equals("I")) {
+                    tree.root = tree.insert(Integer.parseInt(keyAux[1]), tree.root);
+                } else if (keyAux[0].equals("P")) {
+                    tree.searchNode(Integer.parseInt(keyAux[1]), tree.root);
+                } else if (keyAux[0].equals("R")) {
+                    tree.root = tree.removeNode(Integer.parseInt(keyAux[1]), tree.root);
                 }
             }
         }
