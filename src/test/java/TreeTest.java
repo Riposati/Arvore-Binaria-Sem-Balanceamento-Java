@@ -14,9 +14,11 @@ class TreeTest {
 
     @Test
     void treeSearchTest(){
-        this.tree.setRoot(this.tree.insertNode(10, this.tree.getRoot()));
+        this.insertKeys();
         assertEquals( false, this.tree.searchNode(50, this.tree.getRoot()));
+        assertEquals( true, this.tree.searchNode(3, this.tree.getRoot()));
         assertEquals( true, this.tree.searchNode(10, this.tree.getRoot()));
+        assertEquals( true, this.tree.searchNode(15, this.tree.getRoot()));
     }
 
     @Test
