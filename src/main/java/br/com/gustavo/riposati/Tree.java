@@ -3,7 +3,6 @@ package br.com.gustavo.riposati;
 import lombok.Data;
 
 @Data
-
 public class Tree {
     private Node root;
     public static int flag = 0;
