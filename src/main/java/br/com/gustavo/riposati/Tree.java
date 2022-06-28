@@ -5,8 +5,8 @@ import lombok.Data;
 @Data
 public class Tree {
     private Node root;
-    public static int flag = 0;
-    public static int biggest = 0;
+    public static int flag;
+    public static int biggest;
 
     public Node insertNode(int key, Node root) {
 
